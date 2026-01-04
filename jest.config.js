@@ -10,5 +10,5 @@ module.exports = {
     '**/backend/**/*.test.js',
     '**/backend/**/*.spec.js'
   ],
-  testTimeout: 10000
+  testTimeout: 5000
 };

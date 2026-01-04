@@ -82,7 +82,12 @@ jobs:
     - name: Verify server can start
       run: |
         cd backend
-        timeout 10s node server.js || exit 0
+        # Start server in background and check if it's responsive
+        node server.js &
+        SERVER_PID=$!
+        sleep 5
+        curl --fail --silent --max-time 5 http://localhost:3000/health || (kill $SERVER_PID 2>/dev/null; exit 1)
+        kill $SERVER_PID 2>/dev/null || true
       env:
         NODE_ENV: test
         PORT: 3000
