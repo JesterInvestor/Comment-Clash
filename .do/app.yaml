@@ -1,0 +1,55 @@
+name: comment-clash-backend
+
+services:
+  - name: api
+    dockerfile_path: backend/Dockerfile
+    source_dir: backend
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: JesterInvestor/Comment-Clash
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: ROUND_DURATION
+        value: "45000"
+      - key: CARDS_PER_PLAYER
+        value: "7"
+      - key: GAME_CYCLES
+        value: "2"
+      - key: MIN_PLAYERS
+        value: "3"
+      - key: MAX_PLAYERS
+        value: "8"
+      - key: FIREBASE_PROJECT_ID
+        scope: RUN_TIME
+        type: SECRET
+      - key: FIREBASE_PRIVATE_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: FIREBASE_CLIENT_EMAIL
+        scope: RUN_TIME
+        type: SECRET
+      - key: REDIS_URL
+        scope: RUN_TIME
+        type: SECRET
+      - key: DO_SPACES_ENDPOINT
+        scope: RUN_TIME
+        type: SECRET
+      - key: DO_SPACES_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: DO_SPACES_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      - key: DO_SPACES_BUCKET
+        value: comment-clash-videos
+      - key: DO_SPACES_REGION
+        value: nyc3
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
