@@ -24,6 +24,23 @@ app.use(express.json());
 initializeFirebase();
 initializeRedis();
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    name: 'Comment Clash API',
+    version: '1.0.0',
+    description: 'Real-time multiplayer caption game backend',
+    endpoints: {
+      '/': 'API information',
+      '/health': 'Health check endpoint'
+    },
+    socketio: {
+      enabled: true,
+      events: ['createRoom', 'joinRoom', 'startGame', 'submitCaption', 'judgeCaption']
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
