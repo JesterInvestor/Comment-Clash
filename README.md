@@ -211,14 +211,40 @@ npm run dev  # Uses nodemon for auto-reload
 ```
 
 ### Running Tests
+
+The backend includes comprehensive tests that run without external dependencies (Firebase, Redis, S3).
+
 ```bash
 cd backend
-npm test
+npm test              # Run all tests
+npm test:watch        # Run tests in watch mode
+npm test:coverage     # Run tests with coverage report
 ```
+
+**Test Coverage:**
+- Caption generation logic
+- Game room management
+- Player join/leave handling
+- Game state transitions
+- Round mechanics
+- Score tracking
+
+All tests are designed to run without non-essential services, making them perfect for CI/CD pipelines.
 
 ## 🚢 Deployment
 
-### DigitalOcean App Platform
+### Vercel (Recommended)
+
+See [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for detailed Vercel deployment instructions.
+
+**Quick Start:**
+1. Connect GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy with one click
+
+The backend works without external dependencies for testing, but Firebase/Redis are recommended for production.
+
+### DigitalOcean App Platform (Alternative)
 
 1. Fork or clone this repository
 2. Connect to DigitalOcean App Platform
@@ -226,14 +252,14 @@ npm test
 4. Set environment secrets in DigitalOcean dashboard
 5. Deploy automatically on push to main branch
 
-### Environment Secrets to Configure
-- `FIREBASE_PROJECT_ID`
-- `FIREBASE_PRIVATE_KEY`
-- `FIREBASE_CLIENT_EMAIL`
-- `REDIS_URL`
-- `DO_SPACES_KEY`
-- `DO_SPACES_SECRET`
-- `DO_SPACES_ENDPOINT`
+### Environment Variables to Configure
+- `FIREBASE_PROJECT_ID` (optional)
+- `FIREBASE_PRIVATE_KEY` (optional)
+- `FIREBASE_CLIENT_EMAIL` (optional)
+- `REDIS_URL` (optional)
+- `DO_SPACES_KEY` (optional)
+- `DO_SPACES_SECRET` (optional)
+- `DO_SPACES_ENDPOINT` (optional)
 
 ### Frontend Deployment
 
